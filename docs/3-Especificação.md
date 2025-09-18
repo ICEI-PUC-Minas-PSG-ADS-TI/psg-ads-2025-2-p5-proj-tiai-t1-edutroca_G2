@@ -33,6 +33,7 @@ Cada requisito deve representar uma característica única da solução e ser cl
 >  
 > **Como [persona], eu quero [funcionalidade], para que [benefício/motivo].**  seguindo o modelo e conceitos ensinados na disciplina de       
 > Engenharia de Requisitos.   
+
 ---
 ⚠️ **ATENÇÃO:** Escreva de forma que cada história de usuário esteja associada a um requisito funcional específico para facilitar o acompanhamento e validação. Por exemplo:
 
@@ -51,18 +52,38 @@ Cada requisito deve representar uma característica única da solução e ser cl
 <div style="border: 2px dashed #999999; padding: 15px; margin: 10px 0;">
   
 <!-- Espaço para escrever o texto -->  
-**[Escreva aqui as histórias do seu projeto]**
 
-- **História 1 (relacionada ao Requisito RF-01):** 
+- **História 1 (relacionada ao Requisito RF-01):**  
+  Como visitante, eu quero criar uma conta informando nome, e-mail e senha, para que eu possa acessar as funcionalidades do sistema.  
 
-- **História 2 (relacionada ao Requisito RF-02):** 
+- **História 2 (relacionada ao Requisito RF-02):**  
+  Como usuário, eu quero recuperar minha senha caso a esqueça, para que eu consiga continuar acessando minha conta.  
 
+- **História 3 (relacionada ao Requisito RF-03):**  
+  Como administrador, eu quero restringir o acesso apenas a usuários cadastrados, para garantir a segurança e privacidade dos conteúdos.  
 
+- **História 4 (relacionada ao Requisito RF-04):**  
+  Como usuário, eu quero editar meu perfil (foto, nome, áreas de interesse e informações de login), para que meus dados estejam sempre atualizados.  
 
+- **História 5 (relacionada ao Requisito RF-05):**  
+  Como usuário, eu quero selecionar preferências de tipos de conteúdo, para que o sistema me recomende materiais mais relevantes.  
+
+- **História 6 (relacionada ao Requisito RF-06):**  
+  Como usuário, eu quero visualizar a classificação de credibilidade de cada perfil, para que eu possa confiar mais nas interações e conteúdos.  
+
+- **História 7 (relacionada ao Requisito RF-07):**  
+  Como usuário, eu quero publicar conteúdos em formato de vídeos ou perguntas, para que eu possa compartilhar informações e interagir com outros usuários.  
+
+- **História 8 (relacionada ao Requisito RF-08):**  
+  Como usuário, eu quero buscar conteúdos utilizando filtros predefinidos, para que eu encontre rapidamente materiais de interesse.  
+
+- **História 9 (relacionada ao Requisito RF-09):**  
+  Como usuário, eu quero visualizar conteúdos recomendados com base na credibilidade e nas minhas preferências, para que eu tenha acesso ao que for mais útil e confiável.  
 
 </div>
 
 ---
+
 
 ## 3.3 Requisitos Não Funcionais
 
