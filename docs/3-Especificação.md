@@ -119,15 +119,18 @@ Preencha o Quadro abaixo com os requisitos não funcionais que definem **caracte
 
  A tabela abaixo deve ser preenchida com as regras de negócio que **impactam seu projeto**. Os textos no quadro são apenas ilustrativos.
 
-|ID    | Regra de Negócio                                                       |
-|-------|-----------------------------------------------------------------------|
-|RN-01 | Usuário só pode cadastrar até 10 tarefas por dia.                      |
-|RN-02 | Apenas administradores podem alterar permissões de usuários.           |
-|RN-03 | Tarefas vencidas devem ser destacadas em vermelho no sistema.          |
-|RN-04 | *(Descreva aqui a restrição 4 do seu projeto)*                         |
-|RN-05 | *(Descreva aqui a restrição 5 do seu projeto)*                         |
-
-💡 **Dica:** Explique sempre o motivo ou impacto da regra no sistema.
+| ID    | Regra de Negócio                                                                 | Justificativa/Objetivo                                                                 |
+|-------|----------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| RN-01 | Somente usuários cadastrados podem acessar e publicar conteúdos.                  | Garantir segurança e controle de acesso à comunidade.                                  |
+| RN-02 | Cada conteúdo publicado gera créditos que podem ser usados para consumir outros. | Incentivar a colaboração e troca de conhecimento.                                     |
+| RN-03 | O sistema deve atribuir pontos e níveis de reconhecimento por engajamento.       | Estimular gamificação e participação ativa dos usuários.                              |
+| RN-04 | O usuário só poderá acessar conteúdos se possuir créditos suficientes.           | Manter equilíbrio no uso da plataforma e incentivar contribuição.                     |
+| RN-05 | Os vídeos publicados ficam disponíveis sem necessidade de agendamento.           | Facilitar acesso contínuo ao conteúdo e promover flexibilidade de aprendizado.         |
+| RN-06 | A plataforma deve ser simples e acessível a todos.                               | Promover inclusão digital e garantir usabilidade.                                      |
+| RN-07 | Usuários devem interagir de forma respeitosa; conteúdos ofensivos são proibidos. | Manter ambiente saudável, ético e seguro na comunidade.                               |
+| RN-08 | A plataforma não prioriza usuários específicos; relevância define a visibilidade.| Garantir imparcialidade e justiça na recomendação de conteúdos.                       |
+| RN-09 | Créditos não podem ser convertidos em dinheiro real.                             | Evitar uso comercial indevido e manter o foco educacional da plataforma.              |
+| RN-10 | Dados dos usuários devem ser tratados de forma segura.                           | Atender a requisitos legais de privacidade e garantir confiança dos participantes.     |
 
 ---
 > **Links Úteis**:
