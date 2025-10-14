@@ -114,7 +114,7 @@ Estabelecemos um planejamento a fim de descontinuar o acompanhamento do projeto 
 
 | Responsável | Função no Grupo | Tarefa | Início | Prazo | Status | Entrega |
 |-------------|------------------|--------|--------|--------|--------|---------|
-| AlunoY | Front-end Dev | Iniciar tela de login e home | 09/09 | 17/09 | ❌ | — |
+| Débora | Front-end Dev | Criação do script do banco de dados | 01/09 | 16/09 | ✔️ | — |
 | AlunoK | Back-end Dev | Criar estrutura de banco de dados e rotas básicas | 10/09 | 20/09 | ❌ | — |
 | AlunaZ | Testes | Realizar testes iniciais de funcionalidades básicas | 18/09 | 24/09 | ❌ | — |
 | AlunaX (Líder) | Apresentação | Organizar slides e conduzir apresentação parcial | 25/09 | 30/09 | ❌ | — |
