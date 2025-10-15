@@ -6,19 +6,13 @@
 **ARQUITETURA DO SOFTWARE**
 ## 4.1. Arquitetura da Solução
 
-Nesta seção, descreva como os componentes do sistema se organizam e interagem.  
-Inclua um **diagrama de arquitetura** mostrando módulos, camadas e tecnologias utilizadas.
+A arquitetura da solução é fundamentada em um modelo de duas camadas principais: a camada de frontend, que será hospedada na Vercel devido à sua excelente compatibilidade com a tecnologia adotada e aos generosos limites de seu plano de hospedagem, e a camada de backend, hospedada no Microsoft Azure, aproveitando a compatibilidade com a tecnologia utilizada e a parceria estratégica com a instituição de ensino. A tecnologia escolhida para o frontend é o React, enquanto o backend será desenvolvido em .NET Core. A comunicação entre as camadas será realizada por meio de requisições HTTPS, com o frontend consumindo a API exposta pelo backend. Para a segurança e controle de acesso, será implementado um sistema de autenticação baseado em JWT (JSON Web Tokens), no qual o token será armazenado de forma segura nos cookies do navegador e enviado a cada requisição para validação no backend.
 
-**Orientações:**
-- Indique quais módulos compõem a solução (ex.: frontend, backend, banco de dados, APIs externas).
-- Especifique as tecnologias e frameworks adotados (ex.: React, Node.js, MySQL).
-- Explique como ocorre a comunicação entre os módulos.
-
-**Exemplo de diagrama:**
+**Diagrama de Arquitetura:**
  
- ![Exemplo de Arquitetura](./images/arquitetura-exemplo.png)
+ <img width="815" height="560" alt="React drawio" src="https://github.com/user-attachments/assets/07d1c8e2-a846-428e-9e2e-fc23fab158c6" />
 
- 📌 **Entrega:** inserir o diagrama e a descrição detalhada de cada parte.
+
  
 ---
 **MODELAGEM VISUAL DAS TELAS**
