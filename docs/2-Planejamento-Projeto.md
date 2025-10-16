@@ -114,7 +114,7 @@ Estabelecemos um planejamento a fim de descontinuar o acompanhamento do projeto 
 
 | Responsável | Função no Grupo | Tarefa | Início | Prazo | Status | Entrega |
 |-------------|------------------|--------|--------|--------|--------|---------|
-| Débora | Front-end Dev | Criação do script do banco de dados | 01/09 | 16/09 | ⏳ | arquivo banco.sql em src/db |
+| Débora | Front-end Dev | Criação do script do banco de dados | 01/09 | 16/09 | ✔️ | arquivo banco.sql em src/db |
 | Antônio Bertolini | Back-end Dev | Desenvolver a arquitetura da solução | 14/10 | 16/10 | ✔️ | README.md |
 | AlunaZ | Testes | Realizar testes iniciais de funcionalidades básicas | 18/09 | 24/09 | ❌ | — |
 | AlunaX (Líder) | Apresentação | Organizar slides e conduzir apresentação parcial | 25/09 | 30/09 | ❌ | — |
