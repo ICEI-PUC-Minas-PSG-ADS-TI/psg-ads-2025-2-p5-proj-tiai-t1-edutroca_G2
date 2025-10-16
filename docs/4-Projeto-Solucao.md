@@ -94,9 +94,9 @@ O desenvolvimento deve seguir **três etapas**:
 ---
 
 ### 4.4.2 Esquema Relacional
+![MODELO FISICO_page-0001](https://github.com/user-attachments/assets/b1969187-a44d-4848-ba67-d7497a929fbb)
 
 
----[MODELO FISICO.pdf](https://github.com/user-attachments/files/22959509/MODELO.FISICO.pdf)
 
 
 ### 4.4.3 Modelo Físico
