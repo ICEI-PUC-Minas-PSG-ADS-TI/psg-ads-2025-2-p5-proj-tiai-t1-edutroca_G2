@@ -71,6 +71,175 @@ As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de
 > - [Diagramas de Classes - Documentação da IBM](https://www.ibm.com/docs/pt-br/rational-soft-arch/9.6.1?topic=diagrams-class)
 > - [O que é um diagrama de classe UML? | Lucidchart](https://www.lucidchart.com/pages/pt/o-que-e-diagrama-de-classe-uml)
 
+<img width="810" height="834" alt="Diagrama sem nome-Página-2 drawio" src="https://github.com/user-attachments/assets/e234136c-a517-42d5-860e-9ebd2db240a2" />
+
+Código:
+
+@startuml Diagrama_de_Classes
+
+' Definição das Classes (Baseadas nas Tabelas)
+
+class Usuario {
+  - idUsuario: INT
+  - nome: VARCHAR(100)
+  - email: VARCHAR(100)
+  - senha: VARCHAR(255)
+  - fotoPerfil: VARCHAR(255)
+  - tipoUsuario: ENUM(...)
+  - classificacao: DECIMAL(3,2)
+  - bio: TEXT
+  - dataCadastro: TIMESTAMP
+  - ativo: TINYINT(1)
+  - emailVerificado: TINYINT(1)
+  - ultimoAcesso: TIMESTAMP
+  -- Métodos --
+  + cadastrarUsuario()
+  + fazerLogin(email, senha)
+  + atualizarPerfil()
+}
+
+class AreaInteresse {
+  - idArea: INT
+  - nomeArea: VARCHAR(100)
+  - descricao: TEXT
+  - corHex: VARCHAR(7)
+  - ativo: TINYINT(1)
+  - dataCriacao: TIMESTAMP
+  -- Métodos --
+  + criarArea()
+  + consultarConteudos(idArea)
+}
+
+class Conteudo {
+  - idConteudo: INT
+  - titulo: VARCHAR(150)
+  - descricao: TEXT
+  - tipo: ENUM(...)
+  - urlVideo: VARCHAR(255)
+  - duracao: INT
+  - dataPublicacao: TIMESTAMP
+  - publico: TINYINT(1)
+  - ativo: TINYINT(1)
+  - visualizacoes: INT
+  -- Métodos --
+  + publicar()
+  + editar()
+}
+
+class Comentario {
+  - idComentario: INT
+  - texto: TEXT
+  - dataComentario: TIMESTAMP
+  - ativo: TINYINT(1)
+  -- Métodos --
+  + comentar(idConteudo)
+  + excluir()
+}
+
+class Visualizacao {
+  - idVisualizacao: INT
+  - tempoAssistido: INT
+  - dataVisualizacao: TIMESTAMP
+  - concluido: TINYINT(1)
+  -- Métodos --
+  + registrarTempo(idConteudo, idUsuario, tempo)
+}
+
+class Interacao {
+  - idInteracao: INT
+  - tipoInteracao: ENUM(...)
+  - dataInteracao: TIMESTAMP
+  -- Métodos --
+  + registrarInteracao(tipo)
+}
+
+class Recomendacao {
+  - idRecomendacao: INT
+  - prioridade: DECIMAL(5,2)
+  - dataRecomendacao: TIMESTAMP
+  - visualizada: TINYINT(1)
+  -- Métodos --
+  + gerarRecomendacao()
+  + marcarComoVisualizada()
+}
+
+class PreferenciaUsuario {
+  - idPreferencia: INT
+  - tipoConteudoPreferido: ENUM(...)
+  - dataPreferencia: TIMESTAMP
+  - nivelInteresse: ENUM(...)
+  -- Métodos --
+  + definirPreferencia(tipo, nivel)
+}
+
+class UsuarioAreaInteresse {
+  - idUsuarioArea: INT
+  - dataAssociacao: TIMESTAMP
+  -- Métodos --
+  + associarArea()
+  + desassociarArea()
+}
+
+class RecuperacaoSenha {
+  - idRecuperacao: INT
+  - token: VARCHAR(100)
+  - dataSolicitacao: TIMESTAMP
+  - dataExpiracao: TIMESTAMP
+  - utilizado: TINYINT(1)
+  -- Métodos --
+  + solicitarToken()
+  + validarToken(token)
+}
+
+' Relacionamentos (Associações baseadas em Chaves Estrangeiras)
+
+' USUARIO com CONTEUDO (1:N - Usuário publica Conteúdo)
+Usuario "1" -- "0..*" Conteudo : publica/é publicado por
+
+' USUARIO com PREFERENCIA_USUARIO (1:N)
+Usuario "1" -- "0..*" PreferenciaUsuario : define
+
+' USUARIO com COMENTARIO (1:N)
+Usuario "1" -- "0..*" Comentario : faz
+
+' USUARIO com VISUALIZACAO (1:N)
+Usuario "1" -- "0..*" Visualizacao : registra
+
+' USUARIO com INTERACAO (1:N)
+Usuario "1" -- "0..*" Interacao : realiza
+
+' USUARIO com RECOMENDACAO (1:N)
+Usuario "1" -- "0..*" Recomendacao : recebe
+
+' USUARIO com RECUPERACAO_SENHA (1:N)
+Usuario "1" -- "0..*" RecuperacaoSenha : solicita
+
+' USUARIO com AREA_INTERESSE (N:M - Tabela Associativa)
+Usuario "1" -- "0..*" UsuarioAreaInteresse
+AreaInteresse "1" -- "0..*" UsuarioAreaInteresse
+UsuarioAreaInteresse "1" *-- "1" Usuario : idUsuario
+UsuarioAreaInteresse "1" *-- "1" AreaInteresse : idArea
+
+
+' CONTEUDO com AREA_INTERESSE (1:N - Conteúdo pertence a uma Área)
+AreaInteresse "1" -- "0..*" Conteudo : pertence a/tem
+
+' CONTEUDO com COMENTARIO (1:N)
+Conteudo "1" -- "0..*" Comentario : tem
+
+' CONTEUDO com VISUALIZACAO (1:N)
+Conteudo "1" -- "0..*" Visualizacao : registra
+
+' CONTEUDO com INTERACAO (1:N)
+Conteudo "1" -- "0..*" Interacao : relaciona-se com
+
+' CONTEUDO com RECOMENDACAO (1:N)
+Conteudo "1" -- "0..*" Recomendacao : é
+
+' PREFERENCIA_USUARIO com AREA_INTERESSE (1:N - Preferência para uma Área)
+AreaInteresse "1" -- "0..*" PreferenciaUsuario : se refere a
+
+@enduml
 ---
 
 **BANCO DE DADOS**
