@@ -311,24 +311,5 @@ CREATE TABLE Prescricao (
 ## 📌ATENÇÃO: salvar como banco.sql na pasta src/bd
 
 ---
-### 4.4.4 Banco de Dados NoSQL (Opcional)
 
-> **Atenção:** Preencha esta seção **somente se o seu projeto utilizar Banco de Dados NoSQL**.
-
-Se o projeto adotar NoSQL, a entrega deve incluir:
-
-#### 1. Modelo de Coleções / Documentos
-- Descreva como os dados serão organizados em **coleções, documentos ou grafos**.  
-
-#### 2. Exemplos de Documentos / Registros
-- Mostre exemplos reais de dados para cada coleção ou entidade.  
-
-```json
-{
-  "_id": "1",
-  "nome": "Juliana",
-  "email": "juliana@email.com",
-  "perfil": "admin"
-}
-```
 📌 **Entrega:** Inclua aqui os scripts utilizados para criar coleções e inserir dados.
