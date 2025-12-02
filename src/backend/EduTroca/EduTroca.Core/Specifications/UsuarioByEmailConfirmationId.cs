@@ -1,0 +1,11 @@
+﻿using EduTroca.Core.Entities.UsuarioAggregate;
+
+namespace EduTroca.Core.Specifications;
+public class UsuarioByEmailConfirmationId : Specification<Usuario>
+{
+    public UsuarioByEmailConfirmationId(Guid id)
+        : base(u => u.EmailConfirmationCode.Id == id)
+    {
+        AddInclude(u => u.EmailConfirmationCode);
+    }
+}
