@@ -6,6 +6,7 @@ using EduTroca.Presentation;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using EduTroca.Infraestructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -85,6 +86,8 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+await OwnerBootstrapSeeder.SeedAsync(app);
 
 if (app.Environment.IsDevelopment())
 {

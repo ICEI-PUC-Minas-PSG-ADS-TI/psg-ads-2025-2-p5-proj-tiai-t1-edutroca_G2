@@ -1,4 +1,5 @@
 ﻿using EduTroca.UseCases.Common.Behaviors;
+using EduTroca.UseCases.Common.Guards;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,7 @@ public static class ServicesExtensions
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
         });
+        services.AddScoped<HierarchyGuard>();
         services.AddAuthorizers();
         return services;
     }

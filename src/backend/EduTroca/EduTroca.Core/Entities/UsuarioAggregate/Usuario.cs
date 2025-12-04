@@ -24,7 +24,7 @@ public class Usuario : ISoftDelete
     protected Usuario()
     {
     }
-    public Usuario(string nome, string email, string senhaHash, DateTime emailConfirmationExpiresOnUtc, Role initialRole)
+    public Usuario(string nome, string email, string senhaHash, DateTime emailConfirmationExpiresOnUtc, List<Role> initialRoles)
     {
         Id = Guid.NewGuid();
         Nome = nome;
@@ -33,7 +33,7 @@ public class Usuario : ISoftDelete
         Bio = string.Empty;
         EmailConfirmationCode = new EmailConfirmationCode(emailConfirmationExpiresOnUtc);
         CaminhoImagem = string.Empty;
-        _roles.Add(initialRole);
+        _roles = initialRoles;
         IsDeleted = false;
     }
     public void AddRefreshToken(RefreshToken refreshToken)
@@ -47,6 +47,14 @@ public class Usuario : ISoftDelete
             throw new InvalidOperationException($"O refresh token {token} não pertence ao usuario {Id}");
         _refreshTokens.Remove(refreshToken);
     }
+    public void RemoveOldRefreshTokens(int ttlInDays)
+    {
+        var thresholdDate = DateTime.UtcNow.AddDays(-ttlInDays);
+
+        _refreshTokens.RemoveAll(t =>
+            !t.IsActive &&
+            t.CreatedOnUtc <= thresholdDate);
+    }
     public void RevokeRefreshToken(string token)
     {
         var refreshToken = _refreshTokens.FirstOrDefault(rt => rt.Token == token);
@@ -59,6 +67,10 @@ public class Usuario : ISoftDelete
         foreach (var token in _refreshTokens.Where(rt => !rt.IsRevoked))
             token.Revoke();
     }
+    public RefreshToken? FindRefreshToken(string token)
+    {
+        return _refreshTokens.SingleOrDefault(t => t.Token == token);
+    }
     public void AddRole(Role role)
     {
         if (_roles.Any(r => r.Id == role.Id))
@@ -69,9 +81,14 @@ public class Usuario : ISoftDelete
     {
         if (!_roles.Any(r => r.Id == role.Id))
             throw new InvalidOperationException($"O usuario {Id} não possui a role {role.Id}");
-        if(role.Id is (int)ERole.User)
+        if (role.Id is (int)ERole.User)
             throw new InvalidOperationException($"Não é possivel remover a role {role.Id}");
         _roles.Remove(role);
+    }
+    public void SetRoles(List<Role> roles)
+    {
+        _roles.Clear();
+        _roles.AddRange(roles);
     }
     public void AddCategoriaDeInteresse(Categoria categoria)
     {
@@ -102,7 +119,7 @@ public class Usuario : ISoftDelete
     public void UpdateEmail(string novoEmail, DateTime emailConfirmationExpiresOnUtc)
     {
         Email = novoEmail;
-        RegenerateEmailConfirmationCode(emailConfirmationExpiresOnUtc);
+        EmailConfirmationCode = new EmailConfirmationCode(emailConfirmationExpiresOnUtc);
     }
     public void RemoveCategoriaDeInteresse(Categoria categoria)
     {
@@ -114,5 +131,10 @@ public class Usuario : ISoftDelete
     {
         IsDeleted = true;
         DeletedOnUtc = DateTime.UtcNow;
+    }
+
+    public void UpdateSenha(string senhaNovaHash)
+    {
+        SenhaHash = senhaNovaHash;
     }
 }

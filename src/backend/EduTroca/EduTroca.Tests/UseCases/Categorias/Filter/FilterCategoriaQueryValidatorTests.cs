@@ -5,11 +5,11 @@ using FluentValidation.TestHelper;
 namespace EduTroca.Tests.UseCases.Categorias.Filter;
 public class FilterCategoriaQueryValidatorTests
 {
-    private readonly FilterCategoriaQueryValidator _validator;
+    private readonly FilterCategoriasQueryValidator _validator;
 
     public FilterCategoriaQueryValidatorTests()
     {
-        _validator = new FilterCategoriaQueryValidator();
+        _validator = new FilterCategoriasQueryValidator();
     }
 
     [Fact]

@@ -46,7 +46,7 @@ public class EfRepository<T>(AppDbContext context) : IRepository<T> where T : cl
 
         if (specification.OrderByExpression is null && specification.OrderByDescendingExpression is null)
             query = ApplyDefaultOrderBy(query);
-        
+
         var skip = (pageNumber - 1) * pageSize;
         var pagedQuery = query.Skip(skip).Take(pageSize);
 
@@ -54,9 +54,9 @@ public class EfRepository<T>(AppDbContext context) : IRepository<T> where T : cl
 
         return new PagedResult<T>(items, totalCount, pageNumber, pageSize);
     }
-    public async Task<bool> AnyAsync(Specification<T> specification)
+    public async Task<bool> AnyAsync(Specification<T>? specification)
     {
-        var query = ApplySpecification(specification);
+        var query = specification is not null ? ApplySpecification(specification) : _context.Set<T>().AsQueryable();
         return await query.AnyAsync();
     }
     public Task SaveChangesAsync()

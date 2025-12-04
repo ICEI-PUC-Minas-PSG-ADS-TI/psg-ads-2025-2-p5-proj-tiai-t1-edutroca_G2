@@ -10,6 +10,6 @@ public interface IRepository<T> where T : class
     Task<T?> FirstOrDefaultAsync(Specification<T> specification);
     Task<List<T>> ListAsync(Specification<T> specification);
     Task<PagedResult<T>> ListPagedAsync(Specification<T> specification, int pageNumber, int pageSize);
-    Task<bool> AnyAsync(Specification<T> specification);
+    Task<bool> AnyAsync(Specification<T>? specification = null);
     Task SaveChangesAsync();
 }

@@ -12,12 +12,12 @@ namespace EduTroca.Tests.UseCases.Categorias.Filter;
 public class FilterCategoriaQueryHandlerTests
 {
     private readonly Mock<IRepository<Categoria>> _mockRepository;
-    private readonly FilterCategoriaQueryHandler _handler;
+    private readonly FilterCategoriasQueryHandler _handler;
 
     public FilterCategoriaQueryHandlerTests()
     {
         _mockRepository = new Mock<IRepository<Categoria>>();
-        _handler = new FilterCategoriaQueryHandler(_mockRepository.Object);
+        _handler = new FilterCategoriasQueryHandler(_mockRepository.Object);
     }
 
     [Fact]

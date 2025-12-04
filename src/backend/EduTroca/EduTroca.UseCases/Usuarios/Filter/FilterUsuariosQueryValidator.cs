@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
 
-namespace EduTroca.UseCases.Categorias.Filter;
-public class FilterCategoriaQueryValidator : AbstractValidator<FilterCategoriasQuery>
+namespace EduTroca.UseCases.Usuarios.Filter;
+public class FilterUsuariosQueryValidator : AbstractValidator<FilterUsuariosQuery>
 {
-    public FilterCategoriaQueryValidator()
+    public FilterUsuariosQueryValidator()
     {
         RuleFor(x => x.pagination.PageSize)
             .GreaterThan(0).WithMessage("O numero minimo de itens por página é 1.")

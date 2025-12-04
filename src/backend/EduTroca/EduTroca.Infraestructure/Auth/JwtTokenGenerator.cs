@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace EduTroca.Infraestructure.Auth;
@@ -43,5 +44,14 @@ public class JwtTokenGenerator(IOptions<JwtSettings> jwtOptions) : IJwtTokenGene
         foreach (var role in usuario.Roles)
             claims.AddClaim(new Claim(ClaimTypes.Role, role.Nome));
         return new ClaimsIdentity(claims);
+    }
+
+    public RefreshToken GenerateRefreshToken()
+    {
+        var randomBytes = new byte[64];
+        using var rng = RandomNumberGenerator.Create();
+        rng.GetBytes(randomBytes);
+        var token = Convert.ToBase64String(randomBytes);
+        return new RefreshToken(token, DateTime.UtcNow.AddDays(_jwtSettings.RefreshTokenExpirationDays));
     }
 }
