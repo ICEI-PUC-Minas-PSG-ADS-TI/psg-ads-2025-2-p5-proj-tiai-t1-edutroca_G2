@@ -37,7 +37,9 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\uploads\Capas\" />
     <Folder Include="wwwroot\uploads\Imagens\" />
+    <Folder Include="wwwroot\uploads\Videos\" />
   </ItemGroup>
 
 </Project>

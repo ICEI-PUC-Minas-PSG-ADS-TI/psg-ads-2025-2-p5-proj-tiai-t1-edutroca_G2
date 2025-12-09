@@ -1,9 +1,6 @@
-﻿using System.Security.Cryptography;
-
-namespace EduTroca.Core.Entities.UsuarioAggregate;
-public class RefreshToken
+﻿namespace EduTroca.Core.Entities.UsuarioAggregate;
+public class RefreshToken : Entity
 {
-    public Guid Id { get; private set; }
     public string Token { get; private set; }
     public DateTime ExpiresOnUtc { get; private set; }
     public DateTime CreatedOnUtc { get; private set; }
@@ -18,7 +15,6 @@ public class RefreshToken
 
     public RefreshToken(string token, DateTime expiresOnUtc)
     {
-        Id = Guid.NewGuid();
         Token = token;
         ExpiresOnUtc = expiresOnUtc;
         CreatedOnUtc = DateTime.UtcNow;

@@ -1,5 +1,5 @@
-﻿using EduTroca.UseCases.Common.Behaviors;
-using EduTroca.UseCases.Common.Guards;
+﻿using EduTroca.UseCases.Common.Authorization;
+using EduTroca.UseCases.Common.Behaviors;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,20 +12,31 @@ public static class ServicesExtensions
     {
         var assembly = Assembly.GetExecutingAssembly();
         services.AddValidatorsFromAssembly(assembly, includeInternalTypes: true);
-        services.AddMediatR(cfg => {
+        services.AddMediatR(cfg =>
+        {
             cfg.RegisterServicesFromAssembly(assembly);
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
         });
-        services.AddScoped<HierarchyGuard>();
-        services.AddAuthorizers();
+        services.AddAuthorization(assembly);
         return services;
     }
-    private static IServiceCollection AddAuthorizers(this IServiceCollection services)
+    private static IServiceCollection AddAuthorization(this IServiceCollection services, Assembly assembly)
     {
+        services.AddScoped<IAuthorizationService, AuthorizationService>();
         services.Scan(scan => scan
-            .FromAssemblyOf<IAuthorizer<object>>()
-            .AddClasses(classes => classes.AssignableTo(typeof(IAuthorizer<>)))
+            .FromAssemblies(assembly)
+            .AddClasses(classes => classes
+                .AssignableTo(typeof(IAuthorizationRequirement<>))
+                .Where(type => !type.IsAbstract && !type.IsInterface))
+            .AsSelf()
+            .WithScopedLifetime());
+
+        services.Scan(scan => scan
+            .FromAssemblies(assembly)
+            .AddClasses(classes => classes
+                .AssignableTo(typeof(IAuthorizer<>))
+                .Where(type => !type.IsAbstract && !type.IsInterface))
             .AsImplementedInterfaces()
             .WithTransientLifetime());
         return services;

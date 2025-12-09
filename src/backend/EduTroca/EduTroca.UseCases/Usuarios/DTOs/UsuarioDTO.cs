@@ -10,9 +10,11 @@ public class UsuarioDTO
     public string Email { get; }
     public string Bio { get; }
     public string CaminhoImagem { get; }
-    public List<string> Roles { get; }
+    public ENivel Nivel { get; }
+    public List<ERole> Roles { get; }
     public List<CategoriaDTO> CategoriasDeInteresse { get; } = new();
-    private UsuarioDTO(Guid id, string nome, string email, string bio, string caminhoImagem, List<CategoriaDTO> categorias, List<string> roles)
+    private UsuarioDTO(Guid id, string nome, string email, string bio,
+        string caminhoImagem, List<CategoriaDTO> categorias, List<ERole> roles, ENivel nivel)
     {
         Id = id;
         Nome = nome;
@@ -21,11 +23,20 @@ public class UsuarioDTO
         CaminhoImagem = caminhoImagem;
         CategoriasDeInteresse = categorias;
         Roles = roles;
+        Nivel = nivel;
     }
     public static UsuarioDTO FromUsuario(Usuario usuario)
     {
-        var categoriasDTO = usuario.CategoriasDeInteresse.Select(x=>CategoriaDTO.FromCategoria(x)).ToList();
-        var rolesNames = usuario.Roles.Select(x=>x.Nome).ToList();
-        return new UsuarioDTO(usuario.Id, usuario.Nome, usuario.Email, usuario.Bio, usuario.CaminhoImagem, categoriasDTO, rolesNames);
+        var categoriasDTO = usuario.CategoriasDeInteresse.Select(x => CategoriaDTO.FromCategoria(x)).ToList();
+        var rolesNames = usuario.Roles.Select(x => x.Code).ToList();
+        return new UsuarioDTO(
+            usuario.Id,
+            usuario.Nome,
+            usuario.Email,
+            usuario.Bio,
+            usuario.CaminhoImagem,
+            categoriasDTO,
+            rolesNames,
+            usuario.Nivel);
     }
 }

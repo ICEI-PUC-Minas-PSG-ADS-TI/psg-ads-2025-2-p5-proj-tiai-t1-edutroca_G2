@@ -5,7 +5,8 @@ using ErrorOr;
 using MediatR;
 
 namespace EduTroca.UseCases.Categorias.Update;
-public class UpdateCategoriaCommandHandler(IRepository<Categoria> categoriaRepository) : IRequestHandler<UpdateCategoriaCommand, ErrorOr<Success>>
+public class UpdateCategoriaCommandHandler(IRepository<Categoria> categoriaRepository) 
+    : IRequestHandler<UpdateCategoriaCommand, ErrorOr<Success>>
 {
     private readonly IRepository<Categoria> _categoriaRepository = categoriaRepository;
     public async Task<ErrorOr<Success>> Handle(UpdateCategoriaCommand request, CancellationToken cancellationToken)

@@ -10,7 +10,7 @@ public class CreateUsuarioCommandAuthorizer(
     private readonly ICurrentUserService _currentUser = currentUser;
     public async Task<ErrorOr<Success>> AuthorizeAsync(CreateUsuarioCommand request, CancellationToken cancellationToken)
     {
-        if (request.rolesIds is not null && request.rolesIds.Count > 0)
+        if (request.rolesCodes is not null && request.rolesCodes.Count > 0)
         {
             var canAssignRoles = _currentUser.IsInRole(ERole.Admin) || _currentUser.IsInRole(ERole.Owner);
             if (!canAssignRoles)

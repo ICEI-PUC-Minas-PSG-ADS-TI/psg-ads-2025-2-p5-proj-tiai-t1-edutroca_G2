@@ -9,10 +9,10 @@ using MediatR;
 
 namespace EduTroca.UseCases.Usuarios.Create;
 public class CreateUsuarioCommandHandler(
-    IRepository<Usuario> usuarioepository, 
-    IRepository<Role> roleRepository, 
-    IPasswordHasher passwordHasher, 
-    IEmailService emailService) : 
+    IRepository<Usuario> usuarioepository,
+    IRepository<Role> roleRepository,
+    IPasswordHasher passwordHasher,
+    IEmailService emailService) :
     IRequestHandler<CreateUsuarioCommand, ErrorOr<UsuarioDTO>>
 {
     private readonly IRepository<Usuario> _usuarioRepository = usuarioepository;
@@ -24,23 +24,23 @@ public class CreateUsuarioCommandHandler(
         var usuarioByEmailSpecification = new UsuarioByEmail(request.email);
         var existsByEmail = await _usuarioRepository.AnyAsync(usuarioByEmailSpecification);
         if (existsByEmail)
-            return Error.Conflict("Usuario.Email" ,"Email já cadastrado no banco de dados.");
+            return Error.Conflict("Usuario.Email", "Email já cadastrado no banco de dados.");
 
         List<Role> roles = new();
 
-        if (request.rolesIds is not null && request.rolesIds.Count > 0)
+        if (request.rolesCodes is not null && request.rolesCodes.Count > 0)
         {
-            var spec = new RolesByIdsList(request.rolesIds.Cast<int>().ToList());
+            var spec = new RolesByCodesList(request.rolesCodes);
             var rolesEncontradas = await _roleRepository.ListAsync(spec);
 
-            if (rolesEncontradas.Count != request.rolesIds.Count)
+            if (rolesEncontradas.Count != request.rolesCodes.Count)
                 return Error.Validation("Roles.Invalid", "Uma ou mais roles não existem.");
 
             roles = rolesEncontradas;
         }
         else
         {
-            var defaultRole = await _roleRepository.FirstOrDefaultAsync(new RoleById((int)ERole.User));
+            var defaultRole = await _roleRepository.FirstOrDefaultAsync(new RoleByCode(ERole.User));
             if (defaultRole is null) return Error.Unexpected();
             roles.Add(defaultRole);
         }

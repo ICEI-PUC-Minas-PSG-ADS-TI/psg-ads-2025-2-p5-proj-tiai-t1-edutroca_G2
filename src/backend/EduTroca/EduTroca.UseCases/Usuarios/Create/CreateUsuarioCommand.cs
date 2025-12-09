@@ -4,4 +4,5 @@ using ErrorOr;
 using MediatR;
 
 namespace EduTroca.UseCases.Usuarios.Create;
-public record CreateUsuarioCommand(string nome, string email, string senha, List<ERole>? rolesIds = null) : IRequest<ErrorOr<UsuarioDTO>>;
+public record CreateUsuarioCommand(string nome, string email, string senha, List<ERole>? rolesCodes = null) 
+    : IRequest<ErrorOr<UsuarioDTO>>;

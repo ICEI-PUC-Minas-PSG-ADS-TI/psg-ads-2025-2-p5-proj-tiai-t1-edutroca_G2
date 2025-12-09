@@ -14,6 +14,13 @@ public static class ErrorOrExtensions
             errors => HandleErrors(errors)
         );
     }
+    public static IActionResult ToActionResult<TResult, TResponse>(this ErrorOr<TResult> result, Func<TResult, TResponse> mapper)
+    {
+        return result.Match(
+            value => HandleSuccess(mapper(value)),
+            errors => HandleErrors(errors)
+        );
+    }
 
     private static IActionResult HandleSuccess<T>(T value)
     {

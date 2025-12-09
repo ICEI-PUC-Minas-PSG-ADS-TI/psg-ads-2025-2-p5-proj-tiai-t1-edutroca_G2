@@ -3,11 +3,18 @@
 namespace EduTroca.Core.Specifications;
 public class UsuarioByEmail : Specification<Usuario>
 {
-    public UsuarioByEmail(string email)
+    public UsuarioByEmail(string email, bool includeDetails = false, bool includeCredentials = false)
     : base(usuario => usuario.Email == email)
     {
-        AddInclude(usuario => usuario.CategoriasDeInteresse);
-        AddInclude(usuario => usuario.EmailConfirmationCode);
-        AddInclude(usuario => usuario.RefreshTokens);
+        if (includeDetails)
+        {
+            AddInclude(usuario => usuario.Roles);
+            AddInclude(usuario => usuario.CategoriasDeInteresse);
+        }
+        if (includeCredentials)
+        {
+            AddInclude(usuario => usuario.EmailConfirmationCode);
+            AddInclude(usuario => usuario.RefreshTokens);
+        }
     }
 }

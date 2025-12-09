@@ -6,10 +6,11 @@ using ErrorOr;
 using MediatR;
 
 namespace EduTroca.UseCases.Categorias.Create;
-public class CreateCategoriaCommandHandler(IRepository<Categoria> categoriaRepository) : IRequestHandler<CreateCategoriaCommand, ErrorOr<CategoriaDTO>>
+public class CreateCategoriaCommandHandler(IRepository<Categoria> categoriaRepository) 
+    : IRequestHandler<CreateCategoriaCommand, ErrorOr<Guid>>
 {
     private readonly IRepository<Categoria> _categoriaRepository = categoriaRepository;
-    public async Task<ErrorOr<CategoriaDTO>> Handle(CreateCategoriaCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<Guid>> Handle(CreateCategoriaCommand request, CancellationToken cancellationToken)
     {
         var categoriaByNomeSpecification = new CategoriaByNome(request.nome);
         var categoriaExists = await _categoriaRepository.AnyAsync(categoriaByNomeSpecification);
@@ -18,6 +19,6 @@ public class CreateCategoriaCommandHandler(IRepository<Categoria> categoriaRepos
         var categoria = new Categoria(request.nome, request.descricao);
         await _categoriaRepository.AddAsync(categoria);
         await _categoriaRepository.SaveChangesAsync();
-        return CategoriaDTO.FromCategoria(categoria);
+        return categoria.Id;
     }
 }

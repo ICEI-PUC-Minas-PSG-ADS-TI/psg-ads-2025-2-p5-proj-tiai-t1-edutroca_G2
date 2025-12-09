@@ -6,10 +6,10 @@ public class UpdateRolesCommandValidator : AbstractValidator<UpdateRolesCommand>
 {
     public UpdateRolesCommandValidator()
     {
-        RuleFor(x => x.rolesIds.Count)
+        RuleFor(x => x.rolesCodes.Count)
             .GreaterThan(0).WithMessage("São necessarios um ou mais cargos.");
 
-        RuleFor(x => x.rolesIds)
+        RuleFor(x => x.rolesCodes)
             .Must(ids => ids!.Distinct().Count() == ids!.Count)
             .WithMessage("Não envie cargos duplicados.")
             .Must(ids => !ids!.Contains(ERole.Owner))

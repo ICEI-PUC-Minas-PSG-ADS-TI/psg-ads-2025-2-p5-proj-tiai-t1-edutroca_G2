@@ -33,6 +33,17 @@ public class AppDbContext : DbContext
 
                 modelBuilder.Entity(entityType.ClrType).HasQueryFilter(lambda);
             }
+
+            var foreignKeys = entityType.GetForeignKeys()
+                        .Where(fk =>
+                            !fk.IsOwnership &&
+                            typeof(ISoftDelete).IsAssignableFrom(fk.PrincipalEntityType.ClrType) &&
+                            fk.DeleteBehavior == DeleteBehavior.Cascade && 
+                            !fk.Properties.Any(p => p.IsPrimaryKey())
+                        );
+
+            foreach (var fk in foreignKeys)
+                fk.DeleteBehavior = DeleteBehavior.Restrict;
         }
     }
 }

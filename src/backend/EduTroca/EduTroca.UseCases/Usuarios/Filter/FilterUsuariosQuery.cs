@@ -5,4 +5,5 @@ using ErrorOr;
 using MediatR;
 
 namespace EduTroca.UseCases.Usuarios.Filter;
-public record FilterUsuariosQuery(string? nome, List<Guid>? categoriasIds, PaginationDTO pagination) : IRequest<ErrorOr<PagedResult<UsuarioDTO>>>;
+public record FilterUsuariosQuery(string? nome, List<Guid>? categoriasIds, PaginationDTO pagination) 
+    : IRequest<ErrorOr<PagedResult<UsuarioDTO>>>;

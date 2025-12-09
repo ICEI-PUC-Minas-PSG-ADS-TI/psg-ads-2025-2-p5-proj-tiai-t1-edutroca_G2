@@ -7,6 +7,7 @@ public class CategoriaByFilter : Specification<Categoria>
     public CategoriaByFilter(string? nome)
         : base(BuildCriteria(nome))
     {
+        AddOrderBy(x => x.Nome);
     }
     private static Expression<Func<Categoria, bool>>? BuildCriteria(string? nome)
     {

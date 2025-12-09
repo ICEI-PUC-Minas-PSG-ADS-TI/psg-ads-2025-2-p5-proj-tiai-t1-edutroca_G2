@@ -1,13 +1,15 @@
-﻿namespace EduTroca.Core.Entities;
-public class Role
+﻿using EduTroca.Core.Enums;
+
+namespace EduTroca.Core.Entities;
+public class Role : Entity
 {
-    public int Id { get; private set; }
+    public ERole Code { get; set; }
     public string Nome { get; private set; }
     protected Role() { }
 
-    public Role(int id,string name)
+    public Role(ERole code,string nome)
     {
-        Id = id;
-        Nome = name;
+        Code = code;
+        Nome = nome;
     }
 }

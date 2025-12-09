@@ -4,12 +4,13 @@ using EduTroca.Core.Specifications;
 namespace EduTroca.Core.Abstractions;
 public interface IRepository<T> where T : class
 {
-    Task<T> AddAsync(T entity);
-    Task RemoveAsync(T entity);
-    Task<T> UpdateAsync(T entity);
-    Task<T?> FirstOrDefaultAsync(Specification<T> specification);
-    Task<List<T>> ListAsync(Specification<T> specification);
-    Task<PagedResult<T>> ListPagedAsync(Specification<T> specification, int pageNumber, int pageSize);
-    Task<bool> AnyAsync(Specification<T>? specification = null);
-    Task SaveChangesAsync();
+    Task<T> AddAsync(T entity, CancellationToken cancellationToken = default);
+    Task RemoveAsync(T entity, CancellationToken cancellationToken = default);
+    Task<T> UpdateAsync(T entity, CancellationToken cancellationToken = default);
+    Task<T?> FirstOrDefaultAsync(Specification<T>? specification = null, CancellationToken cancellationToken = default);
+    Task<List<T>> ListAsync(Specification<T>? specification = null, CancellationToken cancellationToken = default);
+    Task<PagedResult<T>> ListPagedAsync(int pageNumber, int pageSize, Specification<T>? specification = null, CancellationToken cancellationToken = default);
+    Task<bool> AnyAsync(Specification<T>? specification = null, CancellationToken cancellationToken = default);
+    Task<int> CountAsync(Specification<T>? specification = null, CancellationToken cancellationToken = default);
+    Task SaveChangesAsync(CancellationToken cancellationToken = default);
 }

@@ -1,4 +1,4 @@
-﻿using EduTroca.UseCases.Usuarios.DTOs;
+﻿using EduTroca.UseCases.Common.DTOs;
 using ErrorOr;
 using MediatR;
 

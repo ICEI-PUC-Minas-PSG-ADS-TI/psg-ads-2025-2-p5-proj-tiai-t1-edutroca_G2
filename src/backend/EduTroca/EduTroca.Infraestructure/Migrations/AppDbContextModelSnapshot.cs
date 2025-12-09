@@ -22,6 +22,36 @@ namespace EduTroca.Infraestructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("ConteudoUsuario", b =>
+                {
+                    b.Property<Guid>("LikesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("LikesId1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("LikesId", "LikesId1");
+
+                    b.HasIndex("LikesId1");
+
+                    b.ToTable("Likes", (string)null);
+                });
+
+            modelBuilder.Entity("ConteudoUsuario1", b =>
+                {
+                    b.Property<Guid>("DislikesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("DislikesId1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("DislikesId", "DislikesId1");
+
+                    b.HasIndex("DislikesId1");
+
+                    b.ToTable("Dislikes", (string)null);
+                });
+
             modelBuilder.Entity("EduTroca.Core.Entities.Categoria", b =>
                 {
                     b.Property<Guid>("Id")
@@ -46,9 +76,86 @@ namespace EduTroca.Infraestructure.Migrations
                     b.ToTable("Categorias", (string)null);
                 });
 
+            modelBuilder.Entity("EduTroca.Core.Entities.Comentario", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AutorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ConteudoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DataPublicacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Texto")
+                        .IsRequired()
+                        .HasMaxLength(3000)
+                        .HasColumnType("nvarchar(3000)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AutorId");
+
+                    b.HasIndex("ConteudoId");
+
+                    b.ToTable("Comentario");
+                });
+
+            modelBuilder.Entity("EduTroca.Core.Entities.ConteudoAggregate.Conteudo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AutorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CategoriaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DataPublicacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("Tipo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<int>("Visualizacoes")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AutorId");
+
+                    b.HasIndex("CategoriaId");
+
+                    b.ToTable("Conteudos", (string)null);
+
+                    b.HasDiscriminator<int>("Tipo");
+
+                    b.UseTphMappingStrategy();
+                });
+
             modelBuilder.Entity("EduTroca.Core.Entities.Role", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Code")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
@@ -58,22 +165,28 @@ namespace EduTroca.Infraestructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Code")
+                        .IsUnique();
+
                     b.ToTable("Roles", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = 2,
-                            Nome = "User"
-                        },
-                        new
-                        {
-                            Id = 1,
+                            Id = new Guid("1a4ab49c-5036-4316-b2f6-c2e8fac39705"),
+                            Code = 1,
                             Nome = "Admin"
                         },
                         new
                         {
-                            Id = 3,
+                            Id = new Guid("c999156a-c73e-49b2-9789-ed7e28f1afe7"),
+                            Code = 2,
+                            Nome = "User"
+                        },
+                        new
+                        {
+                            Id = new Guid("7ae60301-fa05-4512-9361-387262ea60b4"),
+                            Code = 3,
                             Nome = "Owner"
                         });
                 });
@@ -103,6 +216,9 @@ namespace EduTroca.Infraestructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<int>("Nivel")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -116,15 +232,16 @@ namespace EduTroca.Infraestructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[IsDeleted] = 0");
 
                     b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("RoleUsuario", b =>
                 {
-                    b.Property<int>("RolesId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("RolesId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("UsuarioId")
                         .HasColumnType("uniqueidentifier");
@@ -141,14 +258,109 @@ namespace EduTroca.Infraestructure.Migrations
                     b.Property<Guid>("CategoriasDeInteresseId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UsuarioId")
+                    b.Property<Guid>("InteressadosId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("CategoriasDeInteresseId", "UsuarioId");
+                    b.HasKey("CategoriasDeInteresseId", "InteressadosId");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("InteressadosId");
 
                     b.ToTable("UsuarioCategorias");
+                });
+
+            modelBuilder.Entity("EduTroca.Core.Entities.ConteudoAggregate.Pergunta", b =>
+                {
+                    b.HasBaseType("EduTroca.Core.Entities.ConteudoAggregate.Conteudo");
+
+                    b.Property<string>("TextoCompleto")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasDiscriminator().HasValue(1);
+                });
+
+            modelBuilder.Entity("EduTroca.Core.Entities.ConteudoAggregate.Video", b =>
+                {
+                    b.HasBaseType("EduTroca.Core.Entities.ConteudoAggregate.Conteudo");
+
+                    b.Property<string>("CaminhoImagem")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CaminhoVideo")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasDiscriminator().HasValue(0);
+                });
+
+            modelBuilder.Entity("ConteudoUsuario", b =>
+                {
+                    b.HasOne("EduTroca.Core.Entities.ConteudoAggregate.Conteudo", null)
+                        .WithMany()
+                        .HasForeignKey("LikesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EduTroca.Core.Entities.UsuarioAggregate.Usuario", null)
+                        .WithMany()
+                        .HasForeignKey("LikesId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ConteudoUsuario1", b =>
+                {
+                    b.HasOne("EduTroca.Core.Entities.ConteudoAggregate.Conteudo", null)
+                        .WithMany()
+                        .HasForeignKey("DislikesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EduTroca.Core.Entities.UsuarioAggregate.Usuario", null)
+                        .WithMany()
+                        .HasForeignKey("DislikesId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EduTroca.Core.Entities.Comentario", b =>
+                {
+                    b.HasOne("EduTroca.Core.Entities.UsuarioAggregate.Usuario", "Autor")
+                        .WithMany("Comentarios")
+                        .HasForeignKey("AutorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EduTroca.Core.Entities.ConteudoAggregate.Conteudo", "Conteudo")
+                        .WithMany("Comentarios")
+                        .HasForeignKey("ConteudoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Autor");
+
+                    b.Navigation("Conteudo");
+                });
+
+            modelBuilder.Entity("EduTroca.Core.Entities.ConteudoAggregate.Conteudo", b =>
+                {
+                    b.HasOne("EduTroca.Core.Entities.UsuarioAggregate.Usuario", "Autor")
+                        .WithMany("Conteudos")
+                        .HasForeignKey("AutorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EduTroca.Core.Entities.Categoria", "Categoria")
+                        .WithMany("Conteudos")
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Autor");
+
+                    b.Navigation("Categoria");
                 });
 
             modelBuilder.Entity("EduTroca.Core.Entities.UsuarioAggregate.Usuario", b =>
@@ -243,9 +455,26 @@ namespace EduTroca.Infraestructure.Migrations
 
                     b.HasOne("EduTroca.Core.Entities.UsuarioAggregate.Usuario", null)
                         .WithMany()
-                        .HasForeignKey("UsuarioId")
+                        .HasForeignKey("InteressadosId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("EduTroca.Core.Entities.Categoria", b =>
+                {
+                    b.Navigation("Conteudos");
+                });
+
+            modelBuilder.Entity("EduTroca.Core.Entities.ConteudoAggregate.Conteudo", b =>
+                {
+                    b.Navigation("Comentarios");
+                });
+
+            modelBuilder.Entity("EduTroca.Core.Entities.UsuarioAggregate.Usuario", b =>
+                {
+                    b.Navigation("Comentarios");
+
+                    b.Navigation("Conteudos");
                 });
 #pragma warning restore 612, 618
         }

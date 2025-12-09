@@ -1,17 +1,19 @@
 ﻿using EduTroca.Core.Abstractions;
 using EduTroca.Core.Entities.UsuarioAggregate;
 using EduTroca.Core.Specifications;
+using EduTroca.UseCases.Usuarios.DTOs;
 using ErrorOr;
 using MediatR;
 
 namespace EduTroca.UseCases.Usuarios.UpdateEmail;
-public class UpdateEmailCommandHandler(IRepository<Usuario> usuarioRepository, IEmailService emailService) : IRequestHandler<UpdateEmailCommand, ErrorOr<Success>>
+public class UpdateEmailCommandHandler(IRepository<Usuario> usuarioRepository, IEmailService emailService) 
+    : IRequestHandler<UpdateEmailCommand, ErrorOr<UsuarioDTO>>
 {
     private readonly IRepository<Usuario> _usuarioRepository = usuarioRepository;
     private readonly IEmailService _emailService = emailService;
-    public async Task<ErrorOr<Success>> Handle(UpdateEmailCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<UsuarioDTO>> Handle(UpdateEmailCommand request, CancellationToken cancellationToken)
     {
-        var usuarioByIdSpecification = new UsuarioById(request.usuarioId);
+        var usuarioByIdSpecification = new UsuarioById(request.usuarioId, includeCredentials: true);
         var usuario = await _usuarioRepository.FirstOrDefaultAsync(usuarioByIdSpecification);
         if(usuario is null)
             return Error.NotFound("Usuario.NotFound", "Usuario inexistente ou inativo.");
@@ -26,6 +28,6 @@ public class UpdateEmailCommandHandler(IRepository<Usuario> usuarioRepository, I
         await _usuarioRepository.UpdateAsync(usuario);
         await _emailService.SendConfirmationAsync(usuario);
         await _usuarioRepository.SaveChangesAsync();
-        return Result.Success;
+        return UsuarioDTO.FromUsuario(usuario);
     }
 }

@@ -11,11 +11,11 @@ public class ResendEmailConfirmationCommandHandler(IRepository<Usuario> usuarioR
     private readonly IEmailService _emailService = emailService;
     public async Task<ErrorOr<Success>> Handle(ResendEmailConfirmationCommand request, CancellationToken cancellationToken)
     {
-        var usuarioByEmailSpecification = new UsuarioByEmail(request.email);
+        var usuarioByEmailSpecification = new UsuarioByEmail(request.email, includeCredentials: true);
         var usuario = await _usuarioRepository.FirstOrDefaultAsync(usuarioByEmailSpecification);
-        if(usuario is null)
+        if (usuario is null)
             return Error.NotFound("Usuario.NotFound", "Usuario inexistente ou inativo.");
-        if(usuario.IsConfirmed)
+        if (usuario.IsConfirmed)
             return Error.Conflict("Usuario.IsConfirmed", "Email de usuario ja confirmado.");
         usuario.RegenerateEmailConfirmationCode(DateTime.UtcNow.AddMinutes(20));
         await _usuarioRepository.UpdateAsync(usuario);

@@ -26,4 +26,28 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+    <Folder Include="UseCases\Categorias\Create\" />
+    <Folder Include="UseCases\Categorias\Delete\" />
+    <Folder Include="UseCases\Categorias\Filter\" />
+    <Folder Include="UseCases\Categorias\Get\" />
+    <Folder Include="UseCases\Categorias\Update\" />
+    <Folder Include="UseCases\Common\Guards\" />
+    <Folder Include="UseCases\Usuarios\AddInterest\" />
+    <Folder Include="UseCases\Usuarios\ConfirmEmail\" />
+    <Folder Include="UseCases\Usuarios\Create\" />
+    <Folder Include="UseCases\Usuarios\Delete\" />
+    <Folder Include="UseCases\Usuarios\Filter\" />
+    <Folder Include="UseCases\Usuarios\Get\" />
+    <Folder Include="UseCases\Usuarios\Login\" />
+    <Folder Include="UseCases\Usuarios\Refresh\" />
+    <Folder Include="UseCases\Usuarios\ResendEmailConfirmation\" />
+    <Folder Include="UseCases\Usuarios\UpdateEmail\" />
+    <Folder Include="UseCases\Usuarios\UpdateProfile\" />
+    <Folder Include="UseCases\Usuarios\UpdateSenha\" />
+    <Folder Include="UseCases\Videos\Create\" />
+    <Folder Include="UseCases\Videos\Update\" />
+  </ItemGroup>
+
 </Project>

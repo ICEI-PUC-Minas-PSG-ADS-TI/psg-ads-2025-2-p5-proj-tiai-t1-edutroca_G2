@@ -6,7 +6,8 @@ using ErrorOr;
 using MediatR;
 
 namespace EduTroca.UseCases.Categorias.Get;
-public class GetCategoriaQueryHandler(IRepository<Categoria> categoriaRepository) : IRequestHandler<GetCategoriaQuery, ErrorOr<CategoriaDTO>>
+public class GetCategoriaQueryHandler(IRepository<Categoria> categoriaRepository) 
+    : IRequestHandler<GetCategoriaQuery, ErrorOr<CategoriaDTO>>
 {
     private readonly IRepository<Categoria> _categoriaRepository = categoriaRepository;
     public async Task<ErrorOr<CategoriaDTO>> Handle(GetCategoriaQuery request, CancellationToken cancellationToken)

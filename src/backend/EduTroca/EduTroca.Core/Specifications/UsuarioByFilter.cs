@@ -7,6 +7,7 @@ public class UsuarioByFilter : Specification<Usuario>
     public UsuarioByFilter(string? nome, List<Guid>? categoriasIds)
         : base(BuildCriteria(nome, categoriasIds))
     {
+        AddOrderBy(x => x.Nome);
     }
     private static Expression<Func<Usuario, bool>>? BuildCriteria(string? nome, List<Guid>? categoriasIds)
     {

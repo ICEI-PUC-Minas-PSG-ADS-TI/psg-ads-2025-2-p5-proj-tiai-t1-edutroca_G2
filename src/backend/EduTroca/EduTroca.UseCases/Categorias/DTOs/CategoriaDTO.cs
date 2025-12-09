@@ -15,6 +15,6 @@ public class CategoriaDTO
     }
     public static CategoriaDTO FromCategoria(Categoria categoria)
     {
-        return new CategoriaDTO(categoria.Id,categoria.Nome, categoria.Descricao);
+        return new CategoriaDTO(categoria.Id, categoria.Nome, categoria.Descricao);
     }
 }

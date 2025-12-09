@@ -1,4 +1,5 @@
 ﻿using EduTroca.UseCases.Common.DTOs;
+using EduTroca.UseCases.Usuarios.DTOs;
 using ErrorOr;
 using MediatR;
 
@@ -7,6 +8,6 @@ public record UpdateProfileCommand(
     Guid usuarioId,
     string nome,
     string bio,
-    PictureDTO? picture,
+    FileDTO? picture,
     bool DeletePicture
-) : IRequest<ErrorOr<Success>>;
+) : IRequest<ErrorOr<UsuarioDTO>>;

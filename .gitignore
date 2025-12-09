@@ -3,3 +3,4 @@
 ################################################################################
 
 /src/backend/EduTroca/EduTroca.WebApi/appsettings.Development.json
+/src/backend/EduTroca/EduTroca.WebApi/wwwroot

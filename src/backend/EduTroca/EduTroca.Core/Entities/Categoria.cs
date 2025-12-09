@@ -1,16 +1,20 @@
-﻿namespace EduTroca.Core.Entities;
-public class Categoria
+﻿using EduTroca.Core.Entities.ConteudoAggregate;
+using EduTroca.Core.Entities.UsuarioAggregate;
+
+namespace EduTroca.Core.Entities;
+public class Categoria : Entity
 {
-    public Guid Id { get; private set; }
     public string Nome { get; private set; }
     public string Descricao { get; private set; }
-    protected Categoria()
-    {
-    }
+    private readonly List<Conteudo> _conteudos = new();
+    public IReadOnlyCollection<Conteudo> Conteudos => _conteudos.AsReadOnly();
+    private readonly List<Usuario> _interessados = new();
+    public IReadOnlyCollection<Usuario> Interessados => _interessados.AsReadOnly();
+
+    protected Categoria() { }
 
     public Categoria(string nome, string descricao)
     {
-        Id = Guid.NewGuid();
         Nome = nome;
         Descricao = descricao;
     }

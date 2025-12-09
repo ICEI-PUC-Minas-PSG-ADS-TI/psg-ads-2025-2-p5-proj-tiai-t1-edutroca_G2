@@ -20,17 +20,17 @@ public class CreateUsuarioCommandValidator : AbstractValidator<CreateUsuarioComm
             .MinimumLength(6).WithMessage("A senha deve possuir no minimo 6 caracteres.")
             .MaximumLength(100).WithMessage("A senha deve possuir no maximo 100 caracteres.");
 
-        When(x => x.rolesIds is not null && x.rolesIds.Count > 0, () =>
+        When(x => x.rolesCodes is not null && x.rolesCodes.Count > 0, () =>
         {
-            RuleFor(x => x.rolesIds)
+            RuleFor(x => x.rolesCodes)
                 .Must(ids => ids!.Distinct().Count() == ids!.Count)
                 .WithMessage("Não envie cargos duplicados.");
 
-            RuleFor(x => x.rolesIds)
+            RuleFor(x => x.rolesCodes)
                 .Must(ids => !ids!.Contains(ERole.Owner))
                 .WithMessage("Não é possível criar um usuário Owner.");
 
-            RuleFor(x => x.rolesIds)
+            RuleFor(x => x.rolesCodes)
                 .Must(ids => ids!.All(id => Enum.IsDefined(typeof(ERole), id)))
                 .WithMessage("Um ou mais cargos informados são inválidos.");
         });

@@ -1,18 +1,20 @@
 ﻿using EduTroca.Core.Abstractions;
 using EduTroca.Core.Entities.UsuarioAggregate;
 using EduTroca.Core.Specifications;
+using EduTroca.UseCases.Common.Helpers;
+using EduTroca.UseCases.Usuarios.DTOs;
 using ErrorOr;
 using MediatR;
 
 namespace EduTroca.UseCases.Usuarios.UpdateProfile;
 public class UpdateProfileCommandHandler(IRepository<Usuario> usuarioRepository, IFileService fileService)
-    : IRequestHandler<UpdateProfileCommand, ErrorOr<Success>>
+    : IRequestHandler<UpdateProfileCommand, ErrorOr<UsuarioDTO>>
 {
     private readonly IRepository<Usuario> _usuarioRepository = usuarioRepository;
     private readonly IFileService _fileService = fileService;
     private const string FolderName = "Imagens";
 
-    public async Task<ErrorOr<Success>> Handle(UpdateProfileCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<UsuarioDTO>> Handle(UpdateProfileCommand request, CancellationToken cancellationToken)
     {
         var usuarioByIdSpecification = new UsuarioById(request.usuarioId);
         var usuario = await _usuarioRepository.FirstOrDefaultAsync(usuarioByIdSpecification);
@@ -30,7 +32,7 @@ public class UpdateProfileCommandHandler(IRepository<Usuario> usuarioRepository,
         {
             if (!string.IsNullOrEmpty(usuario.CaminhoImagem))
                 await _fileService.RemoveFileAsync(usuario.CaminhoImagem, cancellationToken);
-            var extension = GetExtensionFromMimeType(request.picture.ContentType);
+            var extension = FileHelpers.GetExtensionFromMimeType(request.picture.ContentType);
             var newFileName = $"{usuario.Id}{extension}";
             await _fileService.SaveFileAsync(FolderName, newFileName, request.picture.Stream, cancellationToken);
             usuario.UpdatePicture($"{FolderName}/{newFileName}");
@@ -40,18 +42,6 @@ public class UpdateProfileCommandHandler(IRepository<Usuario> usuarioRepository,
         await _usuarioRepository.UpdateAsync(usuario);
         await _usuarioRepository.SaveChangesAsync();
 
-        return Result.Success;
-    }
-    private string GetExtensionFromMimeType(string contentType)
-    {
-        return contentType switch
-        {
-            "image/png" => ".png",
-            "image/gif" => ".gif",
-            "image/jpeg" => ".jpg",
-            "image/jpg" => ".jpg",
-            "image/webp" => ".webp",
-            _ => ".jpg"
-        };
+        return UsuarioDTO.FromUsuario(usuario);
     }
 }

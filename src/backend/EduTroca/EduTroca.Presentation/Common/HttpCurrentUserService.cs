@@ -8,7 +8,6 @@ public class HttpCurrentUserService(IHttpContextAccessor context) : ICurrentUser
 {
     private readonly IHttpContextAccessor _context = context;
     public Guid UserId => Guid.Parse(_context.HttpContext!.User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
-
     public bool IsInRole(ERole role)
     {
         return _context.HttpContext?.User?.IsInRole(role.ToString()) ?? false;

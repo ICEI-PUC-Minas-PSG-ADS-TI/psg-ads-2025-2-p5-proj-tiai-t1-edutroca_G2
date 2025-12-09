@@ -14,16 +14,16 @@ public class AddInterestCommandHandler(
     private readonly IRepository<Categoria> _categoriaRepository = categoriaRepository;
     public async Task<ErrorOr<Success>> Handle(AddInterestCommand request, CancellationToken cancellationToken)
     {
-        var usuarioByIdSpecification = new UsuarioById(request.usuarioId);
+        var usuarioByIdSpecification = new UsuarioById(request.usuarioId, includeDetails: true);
         var usuario = await _usuarioRepository.FirstOrDefaultAsync(usuarioByIdSpecification);
         if (usuario is null)
             return Error.NotFound("Usuario.NotFound", "Usuario inexistente ou inativo.");
         var categoriaByIdSpecification = new CategoriaById(request.categoriaId);
         var categoria = await _categoriaRepository.FirstOrDefaultAsync(categoriaByIdSpecification);
-        if(categoria is null)
+        if (categoria is null)
             return Error.NotFound("Categoria.NotFound", "Categoria inexistente.");
         if (usuario.CategoriasDeInteresse.Contains(categoria))
-            return Error.Conflict("Usuario.Categoria","Usuario ja possui interesse nessa categoria.");
+            return Error.Conflict("Usuario.Categoria", "Usuario ja possui interesse nessa categoria.");
         usuario.AddCategoriaDeInteresse(categoria);
         await _usuarioRepository.UpdateAsync(usuario);
         await _usuarioRepository.SaveChangesAsync();

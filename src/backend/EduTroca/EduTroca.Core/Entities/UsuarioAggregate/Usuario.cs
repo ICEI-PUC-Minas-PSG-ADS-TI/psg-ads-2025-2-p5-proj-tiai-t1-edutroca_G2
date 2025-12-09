@@ -1,10 +1,10 @@
 ﻿using EduTroca.Core.Abstractions;
+using EduTroca.Core.Entities.ConteudoAggregate;
 using EduTroca.Core.Enums;
 
 namespace EduTroca.Core.Entities.UsuarioAggregate;
-public class Usuario : ISoftDelete
+public class Usuario : Entity, ISoftDelete
 {
-    public Guid Id { get; private set; }
     public string Nome { get; private set; }
     public string Email { get; private set; }
     public string SenhaHash { get; private set; }
@@ -14,19 +14,27 @@ public class Usuario : ISoftDelete
     public DateTime? DeletedOnUtc { get; private set; }
     public EmailConfirmationCode EmailConfirmationCode { get; private set; }
     public bool IsConfirmed => EmailConfirmationCode.UsedOnUtc is not null;
+    public ENivel Nivel { get; private set; }
     private readonly List<Role> _roles = new();
     private readonly List<RefreshToken> _refreshTokens = new();
     private readonly List<Categoria> _categoriasDeInteresse = new();
+    private readonly List<Conteudo> _conteudos = new();
+    private readonly List<Comentario> _comentarios = new();
+    private readonly List<Conteudo> _likes = new();
+    private readonly List<Conteudo> _dislikes = new();
     public IReadOnlyCollection<Role> Roles => _roles.AsReadOnly();
     public IReadOnlyCollection<RefreshToken> RefreshTokens => _refreshTokens.AsReadOnly();
     public IReadOnlyCollection<Categoria> CategoriasDeInteresse => _categoriasDeInteresse.AsReadOnly();
+    public IReadOnlyCollection<Conteudo> Conteudos => _conteudos.AsReadOnly();
+    public IReadOnlyCollection<Comentario> Comentarios => _comentarios.AsReadOnly();
+    public IReadOnlyCollection<Conteudo> Likes => _likes.AsReadOnly();
+    public IReadOnlyCollection<Conteudo> Dislikes => _dislikes.AsReadOnly();
 
     protected Usuario()
     {
     }
     public Usuario(string nome, string email, string senhaHash, DateTime emailConfirmationExpiresOnUtc, List<Role> initialRoles)
     {
-        Id = Guid.NewGuid();
         Nome = nome;
         Email = email;
         SenhaHash = senhaHash;
@@ -35,6 +43,7 @@ public class Usuario : ISoftDelete
         CaminhoImagem = string.Empty;
         _roles = initialRoles;
         IsDeleted = false;
+        Nivel = ENivel.Usuario;
     }
     public void AddRefreshToken(RefreshToken refreshToken)
     {
@@ -81,7 +90,7 @@ public class Usuario : ISoftDelete
     {
         if (!_roles.Any(r => r.Id == role.Id))
             throw new InvalidOperationException($"O usuario {Id} não possui a role {role.Id}");
-        if (role.Id is (int)ERole.User)
+        if (role.Code is ERole.User)
             throw new InvalidOperationException($"Não é possivel remover a role {role.Id}");
         _roles.Remove(role);
     }
@@ -136,5 +145,9 @@ public class Usuario : ISoftDelete
     public void UpdateSenha(string senhaNovaHash)
     {
         SenhaHash = senhaNovaHash;
+    }
+    public void SetNivel(ENivel novoNivel)
+    {
+        Nivel = novoNivel;
     }
 }

@@ -1,12 +1,14 @@
 using EduTroca.Infraestructure;
 using EduTroca.Infraestructure.Auth;
+using EduTroca.Infraestructure.Persistence;
+using EduTroca.Presentation;
 using EduTroca.UseCases;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using EduTroca.Presentation;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-using EduTroca.Infraestructure.Persistence;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,7 +46,15 @@ builder.Services.AddUseCases();
 
 //Presentation
 builder.Services.AddControllers()
-    .AddApplicationPart(EduTroca.Presentation.AssemblyReference.Assembly);
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(
+            new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+
+        options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    });
+
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen(option =>
 {
@@ -72,7 +82,6 @@ builder.Services.AddSwaggerGen(option =>
         }
     });
 });
-builder.Services.AddPresentation();
 
 builder.Services.AddCors(options =>
 {
@@ -84,6 +93,8 @@ builder.Services.AddCors(options =>
                   .AllowAnyHeader();
         });
 });
+
+builder.Services.AddPresentation();
 
 var app = builder.Build();
 

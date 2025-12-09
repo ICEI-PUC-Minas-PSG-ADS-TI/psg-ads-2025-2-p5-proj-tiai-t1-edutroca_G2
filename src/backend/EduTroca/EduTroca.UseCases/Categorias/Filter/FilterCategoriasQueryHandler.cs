@@ -7,16 +7,17 @@ using ErrorOr;
 using MediatR;
 
 namespace EduTroca.UseCases.Categorias.Filter;
-public class FilterCategoriasQueryHandler(IRepository<Categoria> categoriaRepository) : IRequestHandler<FilterCategoriasQuery, ErrorOr<PagedResult<CategoriaDTO>>>
+public class FilterCategoriasQueryHandler(IRepository<Categoria> categoriaRepository)
+    : IRequestHandler<FilterCategoriasQuery, ErrorOr<PagedResult<CategoriaDTO>>>
 {
     private readonly IRepository<Categoria> _categoriaRepository = categoriaRepository;
     public async Task<ErrorOr<PagedResult<CategoriaDTO>>> Handle(FilterCategoriasQuery request, CancellationToken cancellationToken)
     {
         var categoriaByNomeSpecification = new CategoriaByFilter(request.nome);
         var categorias = await _categoriaRepository.ListPagedAsync
-            (categoriaByNomeSpecification,
-            request.pagination.PageNumber, 
-            request.pagination.PageSize);
-        return categorias.Map(c=>CategoriaDTO.FromCategoria(c));
+            (request.pagination.PageNumber,
+            request.pagination.PageSize,
+            categoriaByNomeSpecification);
+        return categorias.Map(CategoriaDTO.FromCategoria);
     }
 }

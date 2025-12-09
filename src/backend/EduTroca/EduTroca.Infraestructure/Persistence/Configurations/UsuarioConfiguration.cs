@@ -17,7 +17,8 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
             .IsRequired();
 
         builder.HasIndex(u => u.Email)
-            .IsUnique();
+            .IsUnique()
+            .HasFilter("[IsDeleted] = 0");
 
         builder.Property(u => u.SenhaHash)
             .HasMaxLength(500)
@@ -48,7 +49,7 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
         });
 
         builder.HasMany(u => u.CategoriasDeInteresse)
-            .WithMany()
+            .WithMany(c => c.Interessados)
             .UsingEntity("UsuarioCategorias");
 
         builder.HasMany(u => u.Roles)

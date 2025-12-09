@@ -2,4 +2,4 @@
 using MediatR;
 
 namespace EduTroca.UseCases.Usuarios.UpdateSenha;
-public record UpdateSenhaCommand(Guid usuarioId, string? senhaAtual, string senhaNova) : IRequest<ErrorOr<Success>>;
+public record UpdateSenhaCommand(string usuarioEmail, string senhaAtual, string senhaNova) : IRequest<ErrorOr<Success>>;

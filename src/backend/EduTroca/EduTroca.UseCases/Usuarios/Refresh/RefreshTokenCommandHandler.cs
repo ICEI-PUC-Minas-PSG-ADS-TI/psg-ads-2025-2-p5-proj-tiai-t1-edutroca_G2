@@ -1,6 +1,7 @@
 ﻿using EduTroca.Core.Abstractions;
 using EduTroca.Core.Entities.UsuarioAggregate;
 using EduTroca.Core.Specifications;
+using EduTroca.UseCases.Common.DTOs;
 using EduTroca.UseCases.Usuarios.DTOs;
 using ErrorOr;
 using MediatR;
@@ -34,6 +35,6 @@ public class RefreshTokenCommandHandler(
         usuario.RemoveOldRefreshTokens(30);
         await _usuarioRepository.UpdateAsync(usuario);
         await _usuarioRepository.SaveChangesAsync();
-        return LoginDTO.FromUsuario(usuario, newAccessToken, newRefreshToken.Token);
+        return new LoginDTO(UsuarioDTO.FromUsuario(usuario), newAccessToken, newRefreshToken.Token);
     }
 }

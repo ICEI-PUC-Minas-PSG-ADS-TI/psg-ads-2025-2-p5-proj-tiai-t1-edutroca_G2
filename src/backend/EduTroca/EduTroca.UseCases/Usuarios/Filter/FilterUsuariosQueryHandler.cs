@@ -1,6 +1,5 @@
 ﻿using EduTroca.Core.Abstractions;
 using EduTroca.Core.Common;
-using EduTroca.Core.Entities;
 using EduTroca.Core.Entities.UsuarioAggregate;
 using EduTroca.Core.Specifications;
 using EduTroca.UseCases.Usuarios.DTOs;
@@ -17,9 +16,9 @@ public class FilterUsuariosQueryHandler(
     {
         var usuariosByFilterSpecification = new UsuarioByFilter(request.nome, request.categoriasIds);
         var usuarios = await _usuarioRepository.ListPagedAsync(
-            usuariosByFilterSpecification,
             request.pagination.PageNumber,
-            request.pagination.PageSize);
-        return usuarios.Map(u => UsuarioDTO.FromUsuario(u));
+            request.pagination.PageSize,
+            usuariosByFilterSpecification);
+        return usuarios.Map(UsuarioDTO.FromUsuario);
     }
 }
