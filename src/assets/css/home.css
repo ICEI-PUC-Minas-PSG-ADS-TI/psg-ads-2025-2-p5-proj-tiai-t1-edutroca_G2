@@ -1,0 +1,326 @@
+/* ========================================
+   EduTroca - Home Page Styles
+   ======================================== */
+
+/* Reset e Configurações Básicas */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #F3F4F6;
+    color: #111827;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ========================================
+   Header Section
+   ======================================== */
+
+.home-header {
+    background-color: white;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.home-wrapper {
+    max-width: 1152px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.home-header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+
+/* Brand/Logo */
+.home-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.home-brand-icon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-brand-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+/* Navigation */
+.home-navigation {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.home-nav-link {
+    color: #9CA3AF;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-size: 1rem;
+}
+
+.home-nav-link:hover {
+    color: #4B5563;
+}
+
+.home-user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #DC2626;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.home-user-avatar:hover {
+    background-color: #B91C1C;
+}
+
+/* ========================================
+   Main Content Section
+   ======================================== */
+
+.home-main {
+    padding: 2rem 0;
+}
+
+.home-content-wrapper {
+    max-width: 896px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* ========================================
+   Welcome Banner
+   ======================================== */
+
+.home-welcome-banner {
+    background-color: #DBEAFE;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.home-welcome-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+.home-welcome-subtitle {
+    color: #4B5563;
+    font-size: 1rem;
+}
+
+/* ========================================
+   Categories Grid
+   ======================================== */
+
+.home-categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.home-category-card {
+    background-color: #DC2626;
+    color: white;
+    border: none;
+    border-radius: 0.75rem;
+    padding: 1.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: left;
+}
+
+.home-category-card:hover {
+    background-color: #B91C1C;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.home-category-card:active {
+    transform: translateY(0);
+}
+
+.category-icon {
+    flex-shrink: 0;
+}
+
+.category-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.category-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+    color: #111827;
+}
+
+.category-subtitle {
+    font-size: 0.75rem;
+    font-weight: 400;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* ========================================
+   Search Section
+   ======================================== */
+
+.home-search-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 2rem;
+}
+
+.home-search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.home-search-input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 3rem;
+    background-color: white;
+    border: 2px solid #E5E7EB;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    color: #111827;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.home-search-input:focus {
+    border-color: #111827;
+    box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.1);
+}
+
+.home-search-input::placeholder {
+    color: #9CA3AF;
+}
+
+.home-autocomplete-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    background-color: white;
+    border: 2px solid #E5E7EB;
+    border-radius: 0.75rem;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+    display: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.home-autocomplete-dropdown.show {
+    display: block;
+}
+
+.autocomplete-item {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    color: #111827;
+}
+
+.autocomplete-item:hover,
+.autocomplete-item.autocomplete-active {
+    background-color: #F3F4F6;
+}
+
+.autocomplete-item:last-child {
+    border-radius: 0 0 0.5rem 0.5rem;
+}
+
+/* ========================================
+   Responsive Design
+   ======================================== */
+
+/* Tablets */
+@media (max-width: 768px) {
+    .home-header-content {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .home-navigation {
+        gap: 1rem;
+    }
+
+    .home-categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .home-welcome-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .home-brand-title {
+        font-size: 1.25rem;
+    }
+
+    .home-content-wrapper {
+        padding: 0 0.75rem;
+    }
+
+    .home-categories-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .home-welcome-banner {
+        padding: 1rem;
+    }
+
+    .home-welcome-title {
+        font-size: 1.25rem;
+    }
+
+    .home-welcome-subtitle {
+        font-size: 0.875rem;
+    }
+
+    .home-category-card {
+        padding: 1.25rem 0.75rem;
+    }
+}

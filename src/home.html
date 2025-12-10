@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduTroca - Programação</title>
+    <meta name="description" content="Plataforma educacional para compartilhar vídeos e Q&A">
+    <link rel="stylesheet" href="./assets/css/home.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="home-header">
+        <div class="home-wrapper">
+            <div class="home-header-content">
+                <div class="home-brand">
+                    <div class="home-brand-icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 4L4 10V22L16 28L28 22V10L16 4Z" stroke="#9333EA" stroke-width="2" fill="none"/>
+                            <path d="M16 12L12 14V20L16 22L20 20V14L16 12Z" fill="#9333EA"/>
+                            <circle cx="20" cy="10" r="2" fill="#FBBF24"/>
+                        </svg>
+                    </div>
+                    <h1 class="home-brand-title">EduTroca</h1>
+                </div>
+                <nav class="home-navigation">
+                    <a href="#" class="home-nav-link">sobre</a>
+                    <a href="#" class="home-nav-link">sobre</a>
+                    <a href="#" class="home-nav-link">sobre</a>
+                    <div class="home-user-avatar">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 10C12.7614 10 15 7.76142 15 5C15 2.23858 12.7614 0 10 0C7.23858 0 5 2.23858 5 5C5 7.76142 7.23858 10 10 10Z" fill="white"/>
+                            <path d="M10 12C5.58172 12 2 13.7909 2 16V20H18V16C18 13.7909 14.4183 12 10 12Z" fill="white"/>
+                        </svg>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="home-main">
+        <div class="home-content-wrapper">
+            <!-- Welcome Banner -->
+            <div class="home-welcome-banner">
+                <h2 class="home-welcome-title">Bem vindo(a)</h2>
+                <p class="home-welcome-subtitle">Escolha uma categoria para começar</p>
+            </div>
+            <div class="home-categories-grid">
+                <button class="home-category-card">
+                    <svg class="category-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" stroke="white" stroke-width="2" fill="white"/>
+                    </svg>
+                    <div class="category-content">
+                        <h3 class="category-title">Programação</h3>
+                        <p class="category-subtitle">Aprenda a programar</p>
+                    </div>
+                </button>
+                <button class="home-category-card">
+                    <svg class="category-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 3h7v7H3V3zm11 0h7v7h-7V3zM3 14h7v7H3v-7zm11 0h7v7h-7v-7z" stroke="white" stroke-width="2" fill="white"/>
+                    </svg>
+                    <div class="category-content">
+                        <h3 class="category-title">Matemática</h3>
+                        <p class="category-subtitle">Resolva problemas</p>
+                    </div>
+                </button>
+                <button class="home-category-card">
+                    <svg class="category-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="9" stroke="white" stroke-width="2" fill="none"/>
+                        <path d="M12 3v9l6 3" stroke="white" stroke-width="2"/>
+                    </svg>
+                    <div class="category-content">
+                        <h3 class="category-title">Física</h3>
+                        <p class="category-subtitle">Explore o universo</p>
+                    </div>
+                </button>
+                <button class="home-category-card">
+                    <svg class="category-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="white"/>
+                        <circle cx="12" cy="12" r="4" fill="white"/>
+                    </svg>
+                    <div class="category-content">
+                        <h3 class="category-title">Química</h3>
+                        <p class="category-subtitle">Elementos e reações</p>
+                    </div>
+                </button>
+                <button class="home-category-card">
+                    <svg class="category-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" stroke="white" stroke-width="2" fill="none"/>
+                        <path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12" stroke="white" stroke-width="2"/>
+                    </svg>
+                    <div class="category-content">
+                        <h3 class="category-title">Geografia</h3>
+                        <p class="category-subtitle">Conheça o mundo</p>
+                    </div>
+                </button>
+                <button class="home-category-card">
+                    <svg class="category-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="white" stroke-width="2"/>
+                    </svg>
+                    <div class="category-content">
+                        <h3 class="category-title">História</h3>
+                        <p class="category-subtitle">Viaje no tempo</p>
+                    </div>
+                </button>
+            </div>
+            <div class="home-search-wrapper">
+                <svg class="home-search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="8" cy="8" r="6" stroke="#111827" stroke-width="2" fill="none"/>
+                    <path d="M12.5 12.5L17 17" stroke="#111827" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <input type="text" class="home-search-input" id="categorySearch" placeholder="Outro" autocomplete="off" />
+                <div class="home-autocomplete-dropdown" id="autocompleteDropdown"></div>
+            </div>
+        </div>
+    </main>
+    <script>
+        const categories = ['Programação', 'Matemática', 'Física', 'Química', 'Geografia', 'História'];
+        const searchInput = document.getElementById('categorySearch');
+        const dropdown = document.getElementById('autocompleteDropdown');
+
+        searchInput.addEventListener('input', function() {
+            const value = this.value.toLowerCase();
+            dropdown.innerHTML = '';
+            
+            if (value.length === 0) {
+                dropdown.classList.remove('show');
+                return;
+            }
+
+            const filtered = categories.filter(cat => 
+                cat.toLowerCase().includes(value)
+            );
+
+            if (filtered.length > 0) {
+                filtered.forEach(cat => {
+                    const item = document.createElement('div');
+                    item.className = 'autocomplete-item';
+                    item.textContent = cat;
+                    item.addEventListener('click', function() {
+                        searchInput.value = cat;
+                        dropdown.classList.remove('show');
+                        dropdown.innerHTML = '';
+                    });
+                    dropdown.appendChild(item);
+                });
+                dropdown.classList.add('show');
+            } else {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        searchInput.addEventListener('focus', function() {
+            if (this.value.length > 0 && dropdown.children.length > 0) {
+                dropdown.classList.add('show');
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        // Navegação por teclado
+        let currentFocus = -1;
+        searchInput.addEventListener('keydown', function(e) {
+            const items = dropdown.getElementsByClassName('autocomplete-item');
+            if (e.key === 'ArrowDown') {
+                currentFocus++;
+                addActive(items);
+                e.preventDefault();
+            } else if (e.key === 'ArrowUp') {
+                currentFocus--;
+                addActive(items);
+                e.preventDefault();
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (currentFocus > -1 && items[currentFocus]) {
+                    items[currentFocus].click();
+                }
+            }
+        });
+
+        function addActive(items) {
+            if (!items) return false;
+            removeActive(items);
+            if (currentFocus >= items.length) currentFocus = 0;
+            if (currentFocus < 0) currentFocus = items.length - 1;
+            items[currentFocus].classList.add('autocomplete-active');
+        }
+
+        function removeActive(items) {
+            for (let i = 0; i < items.length; i++) {
+                items[i].classList.remove('autocomplete-active');
+            }
+        }
+    </script>
+</body>
+</html>
