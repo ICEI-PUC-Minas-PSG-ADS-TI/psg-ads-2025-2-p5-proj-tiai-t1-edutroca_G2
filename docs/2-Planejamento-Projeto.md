@@ -128,7 +128,7 @@ Estabelecemos um planejamento a fim de descontinuar o acompanhamento do projeto 
 
 | Responsável | Função no Grupo | Tarefa | Início | Prazo | Status | Entrega |
 |-------------|------------------|--------|--------|--------|--------|---------|
-| AlunoK | Back-end Dev | Concluir rotinas de persistência e regras de negócio | 01/10 | 08/10 | ❌ | — |
+| Débora | Front-end | Desenvolvimento da tela de boas-vindas, tela de login e tela de cadastro | 29/10 | 31/10 | ✔️ | - |
 | AlunoY | Front-end Dev | Finalizar interface com feedback visual ao usuário | 02/10 | 10/10 | ❌ | — |
 | AlunaZ | QA/Testes | Testar sistema completo com dados reais | 06/1
 
