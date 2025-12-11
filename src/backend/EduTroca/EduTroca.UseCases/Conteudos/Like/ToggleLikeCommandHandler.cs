@@ -24,7 +24,7 @@ public class ToggleLikeCommandHandler(
         var conteudo = await _conteudoRepository.FirstOrDefaultAsync(conteudoByIdSpec);
         if (conteudo is null)
             return Error.NotFound("Conteudo.NotFound", "Conteudo inexistente.");
-        var conteudoByLikeSpec = new ConteudoByLike(_currentUser.UserId);
+        var conteudoByLikeSpec = new ConteudoByLike(conteudo.Id, _currentUser.UserId);
         var liked = await _conteudoRepository.AnyAsync(conteudoByLikeSpec);
         var usuarioByIdSpec = new UsuarioById(_currentUser.UserId, includeDetails: true);
         var usuario = await _usuarioRepository.FirstOrDefaultAsync(usuarioByIdSpec);
@@ -32,7 +32,7 @@ public class ToggleLikeCommandHandler(
             conteudo.RemoverLike(usuario);
         else
             conteudo.AdicionarLike(usuario);
-        var conteudoByDislikeSpec = new ConteudoByDislike(_currentUser.UserId);
+        var conteudoByDislikeSpec = new ConteudoByDislike(conteudo.Id, _currentUser.UserId);
         var disliked = await _conteudoRepository.AnyAsync(conteudoByDislikeSpec);
         if (disliked)
             conteudo.RemoverDislike(usuario);

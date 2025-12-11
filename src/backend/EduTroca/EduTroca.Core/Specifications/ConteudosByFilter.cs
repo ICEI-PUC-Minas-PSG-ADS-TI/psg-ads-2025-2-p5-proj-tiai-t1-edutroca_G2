@@ -96,10 +96,10 @@ public class ConteudoByFilterSpec : Specification<Conteudo>
                 AddOrderBy(c => c.Visualizacoes);
                 break;
             case EConteudoOrderBy.MaisLikes:
-                AddOrderByDescending(c => c.Likes);
+                AddOrderByDescending(c => c.Likes.Count);
                 break;
             case EConteudoOrderBy.MenosLikes:
-                AddOrderBy(c => c.Likes);
+                AddOrderBy(c => c.Likes.Count);
                 break;
             case EConteudoOrderBy.MaiorReputacao:
                 AddOrderByDescending(c => c.Autor!.Nivel);

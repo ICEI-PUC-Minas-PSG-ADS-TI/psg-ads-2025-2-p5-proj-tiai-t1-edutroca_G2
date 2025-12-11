@@ -5,16 +5,16 @@ using EduTroca.UseCases.Common.Authorization.Contexts;
 using EduTroca.UseCases.Common.Authorization.Policies;
 using ErrorOr;
 
-namespace EduTroca.UseCases.Usuarios.AddInterest;
-public class AddInterestComandAuthorizer(
+namespace EduTroca.UseCases.Usuarios.SetInterests;
+public class SetInterestsComandAuthorizer(
     ICurrentUserService currentUser,
     IAuthorizationService authService,
-    IRepository<Usuario> usuarioRepository) : IAuthorizer<AddInterestCommand>
+    IRepository<Usuario> usuarioRepository) : IAuthorizer<SetInterestsCommand>
 {
     private readonly ICurrentUserService _currentUser = currentUser;
     private readonly IAuthorizationService _authService = authService;
     private readonly IRepository<Usuario> _usuarioRepository = usuarioRepository;
-    public async Task<ErrorOr<Success>> AuthorizeAsync(AddInterestCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<Success>> AuthorizeAsync(SetInterestsCommand request, CancellationToken cancellationToken)
     {
         var context = new UserModificationContext(_currentUser.UserId, _currentUser.IsInRole, request.usuarioId);
 

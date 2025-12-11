@@ -20,8 +20,8 @@ public class GetConteudoQueryHandler(IRepository<Conteudo> conteudoRepository, I
         conteudo.RegistrarVisualizacao();
         await _conteudoRepository.UpdateAsync(conteudo);
         await _conteudoRepository.SaveChangesAsync();
-        var liked = await _conteudoRepository.AnyAsync(new ConteudoByLike(_currentUser.UserId));
-        var disliked = await _conteudoRepository.AnyAsync(new ConteudoByDislike(_currentUser.UserId));
+        var liked = await _conteudoRepository.AnyAsync(new ConteudoByLike(conteudo.Id, _currentUser.UserId));
+        var disliked = await _conteudoRepository.AnyAsync(new ConteudoByDislike(conteudo.Id, _currentUser.UserId));
         return ConteudoDTO.FromConteudo(conteudo, liked, disliked);
     }
 }

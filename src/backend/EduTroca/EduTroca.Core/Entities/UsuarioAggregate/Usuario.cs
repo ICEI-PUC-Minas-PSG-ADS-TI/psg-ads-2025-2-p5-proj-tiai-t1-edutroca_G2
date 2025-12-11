@@ -99,11 +99,10 @@ public class Usuario : Entity, ISoftDelete
         _roles.Clear();
         _roles.AddRange(roles);
     }
-    public void AddCategoriaDeInteresse(Categoria categoria)
+    public void SetCategoriasDeInteresse(List<Categoria> categorias)
     {
-        if (_categoriasDeInteresse.Any(cat => cat.Id == categoria.Id))
-            throw new InvalidOperationException($"O usuario {Id} ja possui a categoria {categoria.Id}");
-        _categoriasDeInteresse.Add(categoria);
+        _categoriasDeInteresse.Clear();
+        _categoriasDeInteresse.AddRange(categorias);
     }
     public void ConfirmEmail()
     {

@@ -11,6 +11,7 @@ public class SimpleConteudoResponse
     public DateTime DataPublicacao { get; init; }
     public int Visualizacoes { get; init; }
     public int Likes { get; init; }
+    public int Dislikes { get; init; }
     public EConteudoTipo Tipo { get; init; }
     public SimpleUsuarioResponse Autor { get; init; } = null!;
     public SimpleCategoriaResponse Categoria { get; init; } = null!;
@@ -26,6 +27,7 @@ public class SimpleConteudoResponse
             DataPublicacao = conteudo.DataPublicacao,
             Visualizacoes = conteudo.Visualizacoes,
             Likes = conteudo.Likes,
+            Dislikes = conteudo.Dislikes,
             Tipo = conteudo.Tipo,
             Autor = SimpleUsuarioResponse.FromUsuarioDTO(conteudo.Autor),
             Categoria = SimpleCategoriaResponse.FromCategoriaDTO(conteudo.Categoria),

@@ -3,8 +3,8 @@
 namespace EduTroca.Core.Specifications;
 public class ConteudoByDislike : Specification<Conteudo>
 {
-    public ConteudoByDislike(Guid usuarioId, bool includeDetails = false)
-        : base(c => c.Dislikes.Any(u => u.Id == usuarioId))
+    public ConteudoByDislike(Guid conteudoId, Guid usuarioId, bool includeDetails = false)
+        : base(c => c.Id == conteudoId && c.Dislikes.Any(u => u.Id == usuarioId))
     {
         if (includeDetails)
         {

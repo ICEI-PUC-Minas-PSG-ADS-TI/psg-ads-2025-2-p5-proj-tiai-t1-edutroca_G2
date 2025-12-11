@@ -4,7 +4,7 @@ using EduTroca.Presentation.Common;
 using EduTroca.Presentation.DTOs.Requests;
 using EduTroca.Presentation.DTOs.Responses;
 using EduTroca.UseCases.Common.DTOs;
-using EduTroca.UseCases.Usuarios.AddInterest;
+using EduTroca.UseCases.Usuarios.SetInterests;
 using EduTroca.UseCases.Usuarios.Certify;
 using EduTroca.UseCases.Usuarios.ConfirmEmail;
 using EduTroca.UseCases.Usuarios.Create;
@@ -89,15 +89,15 @@ public class UsuariosController(IMediator mediator) : ControllerBase
         var result = await _mediator.Send(query);
         return result.ToActionResult(x => x.Map(SimpleUsuarioResponse.FromUsuarioDTO));
     }
-    [HttpPatch("add-interest")]
+    [HttpPatch("set-interests")]
     [Authorize]
     [ProducesResponseType(typeof(IActionResult), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    public async Task<IActionResult> AddInterest([FromBody] AddInterestRequest request)
+    public async Task<IActionResult> SetInterests([FromBody] SetInterestsRequest request)
     {
-        var command = new AddInterestCommand(request.usuarioId, request.categoriaId);
+        var command = new SetInterestsCommand(request.usuarioId, request.categoriasIds);
         var result = await _mediator.Send(command);
         return result.ToActionResult();
     }
