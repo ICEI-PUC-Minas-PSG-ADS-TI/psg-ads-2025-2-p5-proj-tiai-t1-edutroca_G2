@@ -1,0 +1,24 @@
+@model EduTroca.Infraestructure.Email.EmailModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .btn { background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+        .container { font-family: Arial, sans-serif; padding: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Ola, @Model.Nome!</h2>
+        <p>Obrigado por se cadastrar no Edu Troca.</p>
+        <p>Por favor, confirme seu email clicando no botao abaixo:</p>
+
+        <p style="margin-top: 20px;">
+            <a href="@Model.LinkConfirmacao" class="btn">Confirmar Email</a>
+        </p>
+
+        <p><small>Se você nao criou esta conta, ignore este email.</small></p>
+    </div>
+</body>
+</html>
